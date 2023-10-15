@@ -1,0 +1,180 @@
+# aliases
+x_braille: &x_braille '⡌⠁⠧⠑⠼⠒⡍⠜⠇⠹⠰⠎⡣⠕⠌⠺⠙⠞⠃⠛⠔⠊⠲⡹⠻⠝⠳⠱⠗⠋⠥⠫⠍⠂⠅⠡⡎⡁⠏⡡⡕⠤⠖⡊⠪⠣⡃⠆⠩'
+x_common: &common { yx: mc, title: {}}
+x_ok:     &ok  { <<: *common, border: { color: g }}
+x_ok:     &wrn { <<: *common, border: { color: y }}
+x_err:    &err { <<: *common, border: { color: r }}
+x_man:    &man { <<: *common, yx: br-1-1 }
+# defaults
+_max_hw: [34,104]
+_defaults:
+  # window
+  hw: [1,1]
+  yx: mc
+  extend_hw: 1
+  fill:   { color: c, chars: ' ' }
+  border: { color: d, chars: '' }
+  title:  { val: '<title>', color: d, align: l2, w: a2, chars: ' ' }
+  w_padding: 1
+  # dynamic
+  inputs:  { cl: [1,1], max_len: 30, chars: '_', color_t: c, color_p: c }
+  context: { cl: [1,1], mode: cov, w: 0, align: c, chars: ' ', color: c }
+screen:
+  yx: 0,0
+  hw: ['__lines__','__cols__']
+  title: {}
+  border: {}
+  fill: { chars: ' ' }
+  extend_hw: 0
+bg:
+  hw: [34,104]
+  yx: mc(__screen__)
+  title: {}
+  border: {}
+  fill: { chars: *x_braille, color: d }
+  extend_hw: 0
+# login
+login:
+  hw: [3,20]
+  border: { color: y }
+  title:  { val: 'Login', color: y }
+  # dynamic
+  inputs:
+    login: { max_len: 15, chars: ' ' }
+login_man: { <<: *man }
+login_ok_created:
+  <<: *ok
+  yx: tl(login)+1+1
+  context: { name: { cl: [1,18], mode: ins }}
+login_ok_loaded:
+  <<: *ok
+  yx: tl(login)+1+1
+  context: { name: { cl: [1,17], mode: ins }}
+  extend_hw: 1
+login_err_required:
+  <<: *err
+  yx: tl(login)+1+1
+login_err_reserved:
+  <<: *err
+  yx: tl(login)+1+1
+
+# main
+main_menu:
+  yx: tl(bg)+1+1
+  hw: [30,100]
+  extend_hw: 0
+  title: { val: 'Main Menu', color: c }
+  context:
+    name: { cl: [2,7],  w: 0, color: y }
+    prog: { cl: [7,58], w: 0, color: r, align: r }
+    vi_f: { cl: [9,23], w: 3, color: r }
+    vi_d: { cl: [9,29], w: 3, color: r }
+    vi_c: { cl: [9,35], w: 3, color: y }
+    vi_b: { cl: [9,41], w: 3, color: y }
+    vi_a: { cl: [9,47], w: 3, color: g }
+    vi_t: { cl: [9,53], w: 7, color: b }
+# menu
+menu_unknown:
+  <<: *err
+  yx: mc
+  extend_hw: 1
+  context:
+    key: { cl: [1,23], mode: ins, color: c }
+menu_bye:
+  hw: [3,20]
+  border: { color: g }
+  title:  {}
+# vi
+vi:
+  yx: tl(bg)+1+1
+  hw: [30,100]
+  extend_hw: 0
+  title: { val: 'Verbs Irregular', color: c }
+  context:
+    name:          { cl: [1,7],  w: 0, color: y }
+    vi_f:          { cl: [4,21], w: 3, color: r }
+    vi_d:          { cl: [4,27], w: 3, color: r }
+    vi_c:          { cl: [4,33], w: 3, color: y }
+    vi_b:          { cl: [4,39], w: 3, color: y }
+    vi_a:          { cl: [4,45], w: 3, color: g }
+    vi_t:          { cl: [4,51], w: 7, color: b }
+    vi_batch:      { cl: [7,3],  w: 0, color: d }
+    sc_prior:      { cl: [8,14], w: 6, color: r, align: l }
+    sc_estimate:   { cl: [9,14], w: 0, color: r }
+    sc_score:      { cl: [9,16], w: 0, color: d }
+    sc_estnxt:     { cl: [9,18], w: 0, color: d }
+    vi_v1:         { cl: [8,23], w: 14, color: y, align: l }
+    vi_v1_ipa:     { cl: [9,23], w: 14, color: c, align: l }
+    vi_v2:         { cl: [8,40], w: 14, align: l, color: r }
+    vi_v2_ipa:     { cl: [9,40], w: 14, align: l, color: r }
+    vi_v3:         { cl: [8,57], w: 14, align: l, color: r }
+    vi_v3_ipa:     { cl: [9,57], w: 14, align: l, color: r }
+    vi_v1_example: { cl: [12,23], w: 48, align: l, color: c }
+    vi_v2_example: { cl: [13,23], w: 48, align: l, color: r }
+    vi_v3_example: { cl: [14,23], w: 48, align: l, color: r }
+    vi_v1:         { cl: [8,23], w: 14, align: l, color: c }
+    vi_v1_trans:   { cl: [8,74], w: 15, align: c, color: c }
+# vi_v2
+vi_v2: &vi_v2
+  yx: tl(vi)+7+39
+  hw: [4,18]
+  w_padding: 0
+  title: {}
+  border: {}
+  inputs:
+    v2: { cl: [2,3], max_len: 13, chars: '_', color_t: y, color_p: y }
+vi_v2_back:
+  <<: *vi_v2
+  inputs: {}
+# vi_v3
+vi_v3: &vi_v3
+  yx: tl(vi)+7+56
+  hw: [4,18]
+  w_padding: 0
+  title: {}
+  border: {}
+  inputs:
+    v3: { cl: [2,3], max_len: 13, chars: '_', color_t: y, color_p: y }
+vi_v3_back:
+  <<: *vi_v3
+  inputs: {}
+# vi_res
+x_vi_res: &vi_res
+  yx: tl(vi)+10+74
+  hw: [7,18]
+  extend_hw: 0
+  w_padding: 0
+  border: {}
+  title: {}
+vi_res_ok: { <<: *vi_res }
+vi_res_err: { <<: *vi_res }
+# vi_menu
+vi_menu_continue:
+  border: { color: g }
+  title: {}
+  w_padding: 5
+
+# batch_size
+user_bs:
+  yx: mc+1+1
+  hw: [1,1]
+  border: { color: d }
+  title: { val: 'Change batch size for VerbsIrregular', color: d }
+  inputs:
+    bs: { max_len: 3, cl:[5,23], color_t: y, color_p: y, chars: '_' }
+  context:
+    bs:  { cl: [4,23], color: c, mode: ins }
+user_bs_err:
+  <<: *err
+  yx: tl(user_bs)+1+1
+  title: { val: 'Wrong batch size', color: r }
+  context:
+    err: { cl: [2,27], color: r, mode: ins }
+    bs:  { cl: [3,23], color: d, mode: ins }
+user_bs_ok:
+  <<: *ok
+  yx: tl(user_bs)+1+1
+  w_padding: 2
+  title: { val: 'Batch size updated', color: g }
+  context:
+    bs:  { cl: [2,38], color: c, mode: ins }

@@ -1,0 +1,9 @@
+
+{r}Cann't update batch size:
+{d}(you tried to enter: "")
+
+  Press {y}any key{c} to try one more time, or:
+    {y}M{c}  Main menu
+    {y}Q{c}  Exit
+
+

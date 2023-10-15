@@ -1,0 +1,6 @@
+
+{d}Batch size determines how many questions should be displayed at once.
+{d}Set a new batch size:
+  Current batch size:
+  {y}New batch size:
+

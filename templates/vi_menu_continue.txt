@@ -1,0 +1,9 @@
+
+{g}Would you like to continue?
+
+     {y}Y{c}  Yes
+     {y}C{c}  Change batch size
+     {y}M{c}  Main menu
+     {y}Q{c}  Exit
+
+

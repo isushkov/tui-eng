@@ -1,0 +1,11 @@
+# cache
+curses
+logging
+signal
+time
+# special
+*.log
+data/users/*
+!data/users/_default
+./templates/cache/*
+_theory
